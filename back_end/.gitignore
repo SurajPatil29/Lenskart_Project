@@ -1,0 +1,33 @@
+# Node modules directory
+node_modules/
+
+# Log files
+*.log
+
+# Environment variable files
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE and editor-specific files
+.vscode/
+.idea/
+
+# Build and output directories
+dist/
+build/
+
+# Optional: Temporary files
+*.tmp
+*.swp
+
+# Optional: Dependency directories
+jspm_packages/
+
+# Optional: Yarn lock file (if you're using npm)
+yarn-error.log
+
+
+note.txt
