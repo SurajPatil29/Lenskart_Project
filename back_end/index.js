@@ -20,7 +20,7 @@ const app = express()
 const PORT = process.env.PORT || 3020
 
 app.use(express.json())
-app.use(logger)
+// app.use(logger)
 app.use(cors({
     origin: "*"
 }))
