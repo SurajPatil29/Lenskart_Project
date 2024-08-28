@@ -13,6 +13,7 @@ const homeRoute = require("./routes/home.routes")
 const auth = require("./middlewares/authentication.middleware")
 const cartRouter = require("./routes/cart.route")
 const favouriteRouter = require("./routes/favourite.routes")
+const searchRouter = require("./routes/search.route")
 
 const app = express()
 
@@ -33,6 +34,7 @@ app.use("/kidsGlasses", auth, kidsglassesRoute)
 app.use("/cart",auth, cartRouter)
 app.use("/favourite", auth, favouriteRouter)
 app.use("/home", homeRoute)
+app.use("/search", searchRouter)
 
 
 

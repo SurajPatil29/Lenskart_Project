@@ -1,138 +1,74 @@
-const express = require("express")
-const ProductModel = require("../models/product.model")
-const applyinSorting = require("../middlewares/sorting.middleware")
+// routes/screenglassesRoute.js
 
+const express = require("express");
+const applySortingAndPagination = require("../middlewares/sortingAndPagination.middleware");
+const createProductRouteHandler = require("../util/create_Product");
 
-const screenglassesRoute = express.Router()
+const screenglassesRoute = express.Router();
 
-screenglassesRoute.get("/products", applyinSorting, async(req,res, next) => {
+// Route for all screen glasses products with sorting and pagination
+screenglassesRoute.get(
+    "/products",
+    applySortingAndPagination,
+    createProductRouteHandler({ page: "SCREEN GLASSES" })
+);
+
+// Individual product route
+screenglassesRoute.get("/product/:id", async (req, res, next) => {
     try {
-        const products = await ProductModel.find({page: "SCREEN GLASSES"}).sort(req.sortOptions)
+        const productId = req.params.id;
+        const product = await ProductModel.findOne({ _id: productId });
 
-        if (products.length === 0) {
-            return res.status(404).json({ msg: "No products found" });
+        if (!product) {
+            return res.status(404).json({ error: "Product not found." });
         }
 
-        res.status(200).json(products)
+        res.status(200).json(product);
     } catch (error) {
-        next(error)
+        next(error);
     }
-})
+});
 
-screenglassesRoute.get("/product/:id", async (req, res) => {
-    try {
-        const productId = req.params.id
-        const product = await ProductModel.findOne({_id : productId})
+// Route for men's screen glasses products with sorting and pagination
+screenglassesRoute.get(
+    "/mens",
+    applySortingAndPagination,
+    createProductRouteHandler({ page: "SCREEN GLASSES", type: "Men" })
+);
 
-        if(!product){
-            return res.status(404).json({error : "Product not found."})
-        }
+// Route for women's screen glasses products with sorting and pagination
+screenglassesRoute.get(
+    "/womens",
+    applySortingAndPagination,
+    createProductRouteHandler({ page: "SCREEN GLASSES", type: "Women" })
+);
 
-        res.status(200).json(product)
-    } catch (error) {
-        next(error)
-    }
-})
+// Route for kids' screen glasses products with sorting and pagination
+screenglassesRoute.get(
+    "/kids",
+    applySortingAndPagination,
+    createProductRouteHandler({ page: "SCREEN GLASSES", type: "Kid" })
+);
 
-screenglassesRoute.get("/mens", applyinSorting, async (req,res, next) => {
-    try {
-        const products = await ProductModel.find({page: "SCREEN GLASSES", type: "Men"}).sort(req.sortOptions)
+// Route for full rim screen glasses products with sorting and pagination
+screenglassesRoute.get(
+    "/fullrim",
+    applySortingAndPagination,
+    createProductRouteHandler({ page: "SCREEN GLASSES", "Frame-type": "Full Rim" })
+);
 
-        if(products.length === 0 ){
-            return res.status(404).json({msg : "no product found"})
-        }
+// Route for rimless screen glasses products with sorting and pagination
+screenglassesRoute.get(
+    "/rimless",
+    applySortingAndPagination,
+    createProductRouteHandler({ page: "SCREEN GLASSES", "Frame-type": "Rim Less" })
+);
 
-        res.status(200).json(products)
-    } catch (error) {
-        next(error)
-    }
-})
+// Route for half rim screen glasses products with sorting and pagination
+screenglassesRoute.get(
+    "/halfrim",
+    applySortingAndPagination,
+    createProductRouteHandler({ page: "SCREEN GLASSES", "Frame-type": "Half Rim" })
+);
 
-screenglassesRoute.get("/womens", applyinSorting, async (req,res, next) => {
-    try {
-        const products = await ProductModel.find({page: "SCREEN GLASSES", type: "Women"}).sort(req.sortOptions)
-
-        if(products.length === 0 ){
-            return res.status(404).json({msg : "no product found"})
-        }
-
-        res.status(200).json(products)
-    } catch (error) {
-        next(error)
-    }
-})
-
-screenglassesRoute.get("/kids", applyinSorting, async (req,res, next) => {
-    try {
-        const products = await ProductModel.find({page: "SCREEN GLASSES", type: "Kid"}).sort(req.sortOptions)
-
-        if(products.length === 0 ){
-            return res.status(404).json({msg : "no product found"})
-        }
-
-        res.status(200).json(products)
-    } catch (error) {
-        next(error)
-    }
-})
-
-screenglassesRoute.get("/fullrim", applyinSorting, async (req,res, next) => {
-    try {
-        const products = await ProductModel.find({page: "SCREEN GLASSES", "Frame-type" : "Full Rim"}).sort(req.sortOptions)
-
-        if(products.length === 0 ){
-            return res.status(404).json({msg : "no product found"})
-        }
-
-        res.status(200).json(products)
-    } catch (error) {
-        next(error)
-    }
-})
-
-screenglassesRoute.get("/rimless", applyinSorting, async (req,res, next) => {
-    try {
-        const products = await ProductModel.find({page: "SCREEN GLASSES", "Frame-type" : "Rim Less"}).sort(req.sortOptions)
-
-        if(products.length === 0 ){
-            return res.status(404).json({msg : "no product found"})
-        }
-
-        res.status(200).json(products)
-    } catch (error) {
-        next(error)
-    }
-})
-
-
-screenglassesRoute.get("/halfrim", applyinSorting, async (req,res, next) => {
-    try {
-        const products = await ProductModel.find({page: "SCREEN GLASSES", "Frame-type" : "Half Rim"}).sort(req.sortOptions)
-
-        if(products.length === 0 ){
-            return res.status(404).json({msg : "no product found"})
-        }
-
-        res.status(200).json(products)
-    } catch (error) {
-        next(error)
-    }
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = screenglassesRoute
+module.exports = screenglassesRoute;

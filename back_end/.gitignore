@@ -29,5 +29,5 @@ jspm_packages/
 # Optional: Yarn lock file (if you're using npm)
 yarn-error.log
 
-
+package-lock.json
 note.txt
