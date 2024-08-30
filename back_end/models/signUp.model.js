@@ -31,12 +31,9 @@ const userSchema = mongoose.Schema({
     required: true,
     validate: {
       validator: function (value) {
-        // Password strength requirements
-        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value);
+        return /^[a-zA-Z0-9]{6,}$/.test(value); // At least 6 characters long, letters and numbers only
       },
-      message:
-        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character",
-    },
+      message: 'Password must be at least 6 characters long and contain only letters and numbers',    },
   },
   gender: {
     type: String,
