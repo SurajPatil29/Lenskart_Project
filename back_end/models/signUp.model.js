@@ -9,31 +9,16 @@ const userSchema = mongoose.Schema({
   birthDate: {
     type: String,
     required: true,
-    validate: {
-      validator: function (value) {
-        return /^\d{4}-\d{2}-\d{2}$/.test(value); // YYYY-MM-DD format
-      },
-      message: "Birth date must be in DD-MM-YYYY format",
-    },
   },
   email: {
     type: String,
     required: true,
     trim: true,
     unique: true,
-    match: [
-      /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-      "Invalid email address",
-    ],
   },
   password: {
     type: String,
     required: true,
-    validate: {
-      validator: function (value) {
-        return /^[a-zA-Z0-9]{6,}$/.test(value); // At least 6 characters long, letters and numbers only
-      },
-      message: 'Password must be at least 6 characters long and contain only letters and numbers',    },
   },
   gender: {
     type: String,
