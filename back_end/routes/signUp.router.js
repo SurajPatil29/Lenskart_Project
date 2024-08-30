@@ -70,7 +70,7 @@ signUpRouter.post("/login", validateLoginData ,async (req, res, next)=>{
                     const accessToken = jwt.sign(
                         {id : user._id},
                         key1,
-                        {expiresIn : "10m"}
+                        {expiresIn : "1day"}
                     )
 
                     const refreshToken = jwt.sign(
