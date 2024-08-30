@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
     required: true,
     validate: {
       validator: function (value) {
-        return /^\d{2}-\d{2}-\d{4}$/.test(value); // Updated pattern
+        return /^\d{4}-\d{2}-\d{2}$/.test(value); // YYYY-MM-DD format
       },
       message: "Birth date must be in DD-MM-YYYY format",
     },

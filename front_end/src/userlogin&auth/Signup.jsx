@@ -38,7 +38,7 @@ function Signup() {
       setSuccess(response.data.msg);
       console.log(response)
     } catch (err) {
-
+      console.log(err.response)
       if (err.response && err.response.data) {
         setError(err.response.data.msg);
       } else {
