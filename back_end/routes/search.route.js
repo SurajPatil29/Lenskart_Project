@@ -9,24 +9,27 @@ const ProductModel = require("../models/product.model")
 const searchRouter = express.Router()
 
 
-searchRouter.get("/", applySortingAndPagination, async (req, res, next) => {
-    const { title } = req.query
-    const { sortOptions, paginationOptions } = req
+// Change to GET method instead of POST for search functionality
+searchRouter.get("/product", applySortingAndPagination, async (req, res, next) => {
+    const { title } = req.query;
+    const { sortOptions, paginationOptions } = req;
+
     try {
-        const product = await ProductModel.find({ title: new RegExp(title, "i") }) //case- insensitive search
+        const product = await ProductModel.find({ title: new RegExp(title, "i") }) // case-insensitive search
             .sort(sortOptions)
             .skip(paginationOptions.skip)
-            .limit(paginationOptions.limit)
+            .limit(paginationOptions.limit);
 
-        if(product.length === 0){
-            return res.status(404).json({msg : "No product found"})
+        if (product.length === 0) {
+            return res.status(404).json({ msg: "No product found" });
         }
 
-        res.status(200).json(product)
+        res.status(200).json(product);
     } catch (error) {
-        next(error)
+        next(error);
     }
-})
+});
+
 
 
 

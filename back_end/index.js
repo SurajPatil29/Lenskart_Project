@@ -34,7 +34,7 @@ app.use("/kidsGlasses", auth, kidsglassesRoute)
 app.use("/cart",auth, cartRouter)
 app.use("/favourite", auth, favouriteRouter)
 app.use("/home", homeRoute)
-app.use("/search", searchRouter)
+app.use("/search",auth, searchRouter)
 
 
 

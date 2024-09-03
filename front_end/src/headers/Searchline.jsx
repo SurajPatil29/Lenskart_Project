@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flex, Image, Box, Text, Link as ChakraLink } from '@chakra-ui/react';
 import Search from './Search';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 function Searchline() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is authenticated (e.g., token is present in local storage)
+    const token = localStorage.getItem('accessToken');
+    setIsAuthenticated(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    // Clear user authentication data
+    localStorage.removeItem('accessToken');
+    setIsAuthenticated(false);
+    navigate('/'); // Redirect to login page after logout
+  };
+
   return (
-    <Flex
-      justifyContent="space-around" // Space around elements evenly
-      alignItems="center"
-      mx="auto" // Center horizontally
-    >
+    <Flex justifyContent="space-around" alignItems="center" mx="auto">
       {/* Logo Image */}
       <Image
         src="https://static.lenskart.com/media/desktop/img/site-images/main_logo.svg"
@@ -42,11 +54,7 @@ function Searchline() {
           <Text ml={2} fontSize="sm">Wishlist</Text>
         </ChakraLink>
       </Flex>
-      <Flex
-        alignItems="center"
-        mx={2}
-        display={{ base: 'flex', md: 'none' }}
-      >
+      <Flex alignItems="center" mx={2} display={{ base: 'flex', md: 'none' }}>
         <ChakraLink as={RouterLink} to="/favourite" textDecoration="none">
           <Image
             src="https://www.svgrepo.com/show/13666/heart.svg"
@@ -67,11 +75,7 @@ function Searchline() {
           <Text ml={2} fontSize="sm">Cart</Text>
         </ChakraLink>
       </Flex>
-      <Flex
-        alignItems="center"
-        mx={2}
-        display={{ base: 'flex', md: 'none' }}
-      >
+      <Flex alignItems="center" mx={2} display={{ base: 'flex', md: 'none' }}>
         <ChakraLink as={RouterLink} to="/cart" textDecoration="none">
           <Image
             src="https://cdn.iconscout.com/icon/premium/png-512-thumb/cart-2042683-1723164.png?f=webp&w=256"
@@ -81,11 +85,17 @@ function Searchline() {
         </ChakraLink>
       </Flex>
 
-      {/* Login Section */}
+      {/* Login/Logout Section */}
       <Flex alignItems="center" mx={2}>
-        <ChakraLink as={RouterLink} to="/login" textDecoration="none" colorScheme="teal">
-          Login
-        </ChakraLink>
+        {isAuthenticated ? (
+          <ChakraLink onClick={handleLogout} textDecoration="none" colorScheme="teal">
+            Logout
+          </ChakraLink>
+        ) : (
+          <ChakraLink as={RouterLink} to="/login" textDecoration="none" colorScheme="teal">
+            Login
+          </ChakraLink>
+        )}
       </Flex>
     </Flex>
   );

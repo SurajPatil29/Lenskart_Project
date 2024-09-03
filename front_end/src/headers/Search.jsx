@@ -3,24 +3,31 @@ import { Input, Button, InputGroup, InputRightElement, Box, useBreakpointValue }
 
 function Search() {
   const [input, setInput] = useState("");
-  const [searchData, setSearchData] = useState([])
+  const [searchData, setSearchData] = useState([]);
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // Example API call
-      const response = await fetch('https://api.example.com/search?query=${input}', {
-        method: 'POST',
+      const response = await fetch(`https://lenskart-project.onrender.com/search/product?title=${input}`, {
+        method: 'GET', // Use GET for search operations
         headers: {
           'Content-Type': 'application/json',
+          "authentication" : localStorage.getItem(accessToken)
         },
-        
       });
+
+      // Check if the response is ok (status code in the range 200-299)
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
       const data = await response.json();
-      setSearchData(data)
-      console.log(data); // Handle the response data as needed
+      console.log(data);
+      setSearchData(data);
     } catch (error) {
+      console.log(error)
       console.error('Error:', error);
     }
   };
@@ -42,9 +49,7 @@ function Search() {
           <InputRightElement>
             <Button
               type="submit"
-              
               aria-label="Search"
-              onClick={handleSubmit}
               size={inputSize}
               borderRadius="md" // Rounded corners
             >

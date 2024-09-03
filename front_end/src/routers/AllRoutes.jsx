@@ -13,7 +13,7 @@ import { Sunglasses } from "../pages/Sunglasses"
 import { Home_eye_test } from "../pages/Home_eye_test"
 import { Store_locator } from "../pages/Store_locator"
 import { Home } from "../pages/Home"
-import { Errorhandling } from "../loading&error/Errorhandling"
+import { ErrorHandler } from "../loading&error/Errorhandling"
 import { Loadinghandling } from "../loading&error/Loadinghandling"
 import { EyeFullrim } from "../pages/eyeglassesFilters/EyeFullrim"
 import { EyeHalfrim } from "../pages/eyeglassesFilters/EyeHalfrim"
@@ -52,7 +52,7 @@ function AllRoutes() {
       <Route path="/sun_glasses" element={<Sunglasses />} />
       <Route path="/home_eye_test" element={<Home_eye_test />} />
       <Route path="/store_locator" element={<Store_locator />} />
-      <Route path="/error" element={<Errorhandling />} />
+      <Route path="/error" element={<ErrorHandler />} />
       <Route path="/loading" element={<Loadinghandling />} />
       <Route path="/eye_glasses/eye_full_rim" element={<EyeFullrim />} />
       <Route path="/eye_glasses/eye_half_rim" element={<EyeHalfrim />} />

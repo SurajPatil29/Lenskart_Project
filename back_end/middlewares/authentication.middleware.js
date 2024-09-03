@@ -22,7 +22,7 @@ const auth = async (req, res, next) => {
         }
 
         // Verify JWT token
-        const decoded = await jwt.verify(token, key1);
+        const decoded = jwt.verify(token, key1);
 
         // Find user by ID from decoded token
         const user = await UserModel.findOne({ _id: decoded.id });

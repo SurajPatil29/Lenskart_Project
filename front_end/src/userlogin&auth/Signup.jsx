@@ -10,7 +10,10 @@ import {
   VStack,
   RadioGroup,
   Radio,
+  Spinner,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import {ErrorHandler} from '../loading&error/Errorhandling';  // Import your ErrorHandler component
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -23,6 +26,8 @@ function Signup() {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false); // State for loading
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,19 +37,27 @@ function Signup() {
     e.preventDefault();
     setError('');
     setSuccess('');
+    setLoading(true);  // Start loading
 
     try {
       const response = await axios.post('https://lenskart-project.onrender.com/user/signup', formData);
       setSuccess(response.data.msg);
-      console.log(response)
+      console.log(response);
+      setLoading(false);  // Stop loading
     } catch (err) {
-      console.log(err.response)
+      console.log(err.response);
+      setLoading(false);  // Stop loading
       if (err.response && err.response.data) {
         setError(err.response.data.msg);
       } else {
         setError('An error occurred. Please try again.');
       }
     }
+  };
+
+  // Function to handle navigation to the login page
+  const handleLoginNavigation = () => {
+    navigate('/login');
   };
 
   return (
@@ -58,34 +71,19 @@ function Signup() {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      _before={{
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        bg: 'rgba(0, 0, 0, 0.5)', // Dark overlay with transparency
-        zIndex: 0,
-        transition: 'opacity 1s ease-in-out', // Smooth transition effect
-        opacity: 1, // Start fully opaque
-      }}
-      _hover={{
-        _before: {
-          opacity: 0.7, // Reduced opacity on hover for transition effect
-        },
-      }}
     >
       <Box
-        position="relative"
-        width="400px"
+        width={['90%', '75%', '400px', '400px']}  // Responsive width
         p="6"
         borderRadius="md"
         boxShadow="lg"
-        zIndex={1} // Ensure the form is above the background image
-        bg="rgba(255, 255, 255, 0.2)" // Semi-transparent white background
-        backdropFilter="blur(10px)" // Apply blur effect
+        zIndex={1}
+        bg="rgba(255, 255, 255, 0.2)"
+        backdropFilter="blur(10px)"
       >
+        {/* Display ErrorHandler Component */}
+        <ErrorHandler error={error} onClose={() => setError('')} />
+
         <form onSubmit={handleSubmit}>
           <VStack spacing={4}>
             {/* Name Input */}
@@ -151,23 +149,39 @@ function Signup() {
                 <VStack align="start">
                   <Radio value="male">Male</Radio>
                   <Radio value="female">Female</Radio>
-                  
                 </VStack>
               </RadioGroup>
             </FormControl>
 
             {/* Submit Button */}
-            <Button type="submit" colorScheme="blackAlpha" width="full" color="black">
-              Sign Up
+            <Button
+              type="submit"
+              colorScheme="blackAlpha"
+              width="full"
+              color="black"
+              isLoading={loading}  // Disable button and show spinner when loading
+              spinner={<Spinner size="sm" />}  // Custom spinner
+              disabled={loading}
+            >
+              {loading ? 'Signing Up...' : 'Sign Up'}
             </Button>
 
-            {/* Display Error Message */}
-            {error && <FormErrorMessage>{error}</FormErrorMessage>}
             {/* Display Success Message */}
-            {success && <Box color="green.500">{success}</Box>}
+            {success && <Box color="black.500">{success}</Box>}
           </VStack>
         </form>
       </Box>
+      {/* Login Button */}
+      <Button
+        onClick={handleLoginNavigation}
+        colorScheme="teal"
+        position="absolute"
+        bottom={['10px', '20px']}
+        right={['10px', '20px']}
+        size="sm"
+      >
+        Login
+      </Button>
     </Box>
   );
 }

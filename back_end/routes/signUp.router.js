@@ -69,8 +69,8 @@ signUpRouter.post("/login", validateLoginData ,async (req, res, next)=>{
                 if(result){
                     const accessToken = jwt.sign(
                         {id : user._id},
-                        key1,
-                        {expiresIn : "1day"}
+                        key1
+                        
                     )
 
                     const refreshToken = jwt.sign(
