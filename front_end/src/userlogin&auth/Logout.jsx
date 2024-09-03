@@ -36,7 +36,7 @@ function Logout() {
       alert('You have been logged out successfully.');
 
       // Redirect to the login page
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
       alert('An error occurred during logout. Please try again.');

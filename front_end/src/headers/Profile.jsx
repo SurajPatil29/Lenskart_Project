@@ -1,9 +1,20 @@
 // src/components/ProfileImage.js
 import React, { useEffect, useState } from 'react';
-import { Avatar, Box, Button, useDisclosure, Spinner, Alert, AlertIcon, AlertTitle, AlertDescription, Center } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Button,
+  useDisclosure,
+  Spinner,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Center,
+} from '@chakra-ui/react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import UploadImagePopup from './UploadImagePopup';
+import UploadImagePopup from './UploadImagePopup'; // Uncommented the import statement
 
 const ProfileImage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,22 +34,19 @@ const ProfileImage = () => {
     const fetchProfileImg = async () => {
       try {
         const token = localStorage.getItem("accessToken");
-
-        // Set up headers with Authorization token
         const config = {
-            headers: {
-                authentication: `Bearer ${token}`,  // Include the token in the Authorization header
-            },
-        }
-        const response = await axios.get('https://lenskart-project.onrender.com/profile/userProfileImg',config, {
-          body: { userId },
-          
-        });
+          headers: {
+            Authorization: `Bearer ${token}`,  // Corrected to Authorization header
+          },
+          params: { userId }, // Correct usage of params for query parameters
+        };
+
+        const response = await axios.get('https://lenskart-project.onrender.com/profile/userProfileImg', config);
         setProfileImg(response.data.Img || ''); // Use empty string if no image
-        console.log(response)
+        console.log(response);
       } catch (error) {
-        console.log(error.response)
-        setError('Failed to load profile image.');
+        console.error(error.response);
+        setError('Failed to load profile image.'); // Improved error message
       } finally {
         setLoading(false);
       }
