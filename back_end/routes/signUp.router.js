@@ -85,7 +85,8 @@ signUpRouter.post("/login", validateLoginData ,async (req, res, next)=>{
                         msg : "key2",
                         accessToken,
                         refreshToken,
-                        expiryTimestamp
+                        expiryTimestamp,
+                        id : user._id
                     })
                 }else{
                     res.status(400).json({

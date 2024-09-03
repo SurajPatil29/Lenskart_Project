@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Flex, Image, Box, Text, Link as ChakraLink } from '@chakra-ui/react';
 import Search from './Search';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import ProfileImage from './Profile';
 
 function Searchline() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -84,6 +85,8 @@ function Searchline() {
           />
         </ChakraLink>
       </Flex>
+
+      <ProfileImage />
 
       {/* Login/Logout Section */}
       <Flex alignItems="center" mx={2}>

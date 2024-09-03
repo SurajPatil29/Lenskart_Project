@@ -1,8 +1,15 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { fetchProducts } from '../../redux/actions/eyeglassesAction'
 
 function EyeHalfrim() {
+  const dispatch = useDispatch()
+
+  const handleFilter = () => {
+    dispatch(fetchProducts)
+  }
   return (
-    <div>EyeHalfrim</div>
+    <button onClick={handleFilter}>EyeHalfrim</button>
   )
 }
 

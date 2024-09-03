@@ -39,12 +39,14 @@ function Login() {
       setSuccess(response.data.msg);
 
       // Handle the tokens and expiration
-      const { accessToken, refreshToken, expiryTimestamp } = response.data;
+      const { accessToken, refreshToken, expiryTimestamp, id } = response.data;
 
       // Save tokens in local storage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
       localStorage.setItem('expiryTimestamp', expiryTimestamp);
+      localStorage.setItem('id', id);
+
 
       console.log('Tokens saved to local storage');
       setLoading(false);  // Stop loading

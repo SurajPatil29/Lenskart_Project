@@ -31,6 +31,7 @@ function Logout() {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('expiryTimestamp');
+      localStorage.removeItem('id');
 
       alert('You have been logged out successfully.');
 
