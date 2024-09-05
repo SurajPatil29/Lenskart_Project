@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { FooterMain } from "./footer/FooterMain"
-import { HeaderMain } from "./headers/headerMain"
 import { AllRoutes } from "./routers/AllRoutes"
+import { HeaderMain } from "./HeaderMain";
 
 
 
