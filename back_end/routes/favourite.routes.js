@@ -35,6 +35,25 @@ favouriteRouter.post("/add", async (req, res, next) => {
     }
 });
 
+favouriteRouter.get("/all", async (req, res, next) => {
+    
+    try {
+        const favourite = await FavouriteModel.find({}).populate('products');
+
+        if (!favourite) {
+            return res.status(404).json({ msg: "Favorites not found" });
+        }
+
+        if (favourite.products.length === 0) {
+            return res.status(200).json({ msg: "Favorites list is empty", products: [] });
+        }
+
+        res.status(200).json(favourite);
+    } catch (error) {
+        next(error);
+    }
+});
+
 // Get all favorite products for a user
 favouriteRouter.get("/:userId", async (req, res, next) => {
     const { userId } = req.params;

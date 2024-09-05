@@ -35,6 +35,25 @@ cartRouter.post("/add", async (req, res, next) =>{
     }
 })
 
+cartRouter.get("/all", async (req, res, next) => {
+    
+    try {
+        const cart = await CartModel.find({}).populate('products')
+
+        if(!cart){
+            return res.status(404).json({msg : "Cart not found"})
+        }
+
+        if(cart.products.length === 0 ){
+            return res.status(200).json({msg : "cart is empty", products : []})
+        }
+
+        res.status(200).json(cart.products)
+    } catch (error) {
+        next(error)
+    }
+})
+
 cartRouter.get("/:userId", async (req, res, next) => {
     const {userId} = req.params
     try {

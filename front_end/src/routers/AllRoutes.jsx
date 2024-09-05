@@ -39,6 +39,8 @@ import { PageComponantScreenGlasses } from "../utils/PageComponantScreenGlasses"
 import { BuyProdE } from "../utils/compoEyehelper/BuyProdE"
 import { ProductDetailsK } from "../utils/compoKidshelper/ProductDetailsK"
 import { BuyProdK } from "../utils/compoKidshelper/BuyProdK"
+import { ProductDetailsS } from "../utils/compoScreenhelper/ProductDetailsS"
+import { BuyProdS } from "../utils/compoScreenhelper/BuyProdS"
 
 function AllRoutes() {
   return (
@@ -83,6 +85,8 @@ function AllRoutes() {
       <Route path="/buy_product/:id" element={<BuyProdE />} />
       <Route path="/productK/:id" element={<ProductDetailsK />} />
       <Route path="/buy_productK/:id" element={<BuyProdK />} />
+      <Route path="/productS/:id" element={<ProductDetailsS />} />
+      <Route path="/buy_productsS/:id" element={<BuyProdS />} />
     </Routes>
   )
 }
