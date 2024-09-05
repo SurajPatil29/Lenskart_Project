@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ErrorHandler } from '../loading&error/Errorhandling';
 import { Loadinghandling as LoadingSpinner } from '../loading&error/Loadinghandling';
 import { fetchScreenGlasses, setScreenGlassesPage, setScreenGlassesSort } from '../redux/actions/screenGlassesAction';
+import { PageComponantScreenGlasses } from '../utils/PageComponantScreenGlasses';
 function Screen_glasses() {
   const dispatch = useDispatch();
   const { products, loading, error, page, sort } = useSelector((state) => state.screenGlasses);
@@ -32,21 +33,10 @@ function Screen_glasses() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div>
-          {/* Display products */}
-         <h1>hii</h1>
-        </div>
+        <PageComponantScreenGlasses />
       )}
 
-      {/* Pagination Controls */}
-      <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Previous</button>
-      <button onClick={() => handlePageChange(page + 1)}>Next</button>
-
-      {/* Sorting Controls */}
-      <button onClick={() => handleSortChange("price", "asc")}>Sort by Price (Asc)</button>
-      <button onClick={() => handleSortChange("price", "desc")}>Sort by Price (Desc)</button>
-      <button onClick={() => handleSortChange("rating", "asc")}>Sort by Rating (Asc)</button>
-      <button onClick={() => handleSortChange("rating", "desc")}>Sort by Rating (Desc)</button>
+    
     </div>
   );
 }

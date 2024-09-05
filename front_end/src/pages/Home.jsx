@@ -58,9 +58,9 @@ function Home() {
         ) : (
           <Box>
             {homes && homes.length > 0 ? (
-              homes.map((home) =>
+              homes.map((home,i) =>
                 home.row === "second row" ? (
-                  <Box key={home.id} mb={4}>
+                  <Box key={i} mb={4}>
                     <ImageDisplay imageUrl={home.image} altText="Image" />
                   </Box>
                 ) : null
@@ -79,9 +79,9 @@ function Home() {
         ) : (
           <Box>
             {homes && homes.length > 0 ? (
-              homes.map((home) =>
+              homes.map((home,i) =>
                 home.row === "third row" ? (
-                  <Box key={home.id} mb={4}>
+                  <Box key={i} mb={4}>
                     <ImageDisplay imageUrl={home.image} altText="Image" />
                   </Box>
                 ) : null
@@ -122,9 +122,9 @@ function Home() {
         ) : (
           <Box>
             {homes && homes.length > 0 ? (
-              homes.map((home) =>
+              homes.map((home,i) =>
                 home.row === "fourth row" ? (
-                  <Box key={home.id} mb={4}>
+                  <Box key={i} mb={4}>
                     <ImageDisplay imageUrl={home.image} altText="Image" />
                   </Box>
                 ) : null
@@ -164,9 +164,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "free proggesive lenses" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -195,9 +195,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "book eye test at home" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -226,9 +226,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "free online eye test" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -257,9 +257,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "premium eyewear" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -288,9 +288,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "as seen on mouni roy" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -319,9 +319,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "as seen on shark tank" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -350,9 +350,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "as seen on karan johar" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -381,9 +381,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "tranding sunglasses" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -413,9 +413,9 @@ function Home() {
           ) : (
             <Box>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "aquacolor - glam up with color lenses" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageDisplay imageUrl={home.image} altText="Image" />
                     </Box>
                   ) : null
@@ -444,9 +444,9 @@ function Home() {
           ) : (
             <Box px={20}>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "Find the perfect fit" ? (
-                    <Box key={home.id} mb={4}>
+                    <Box key={i} mb={4}>
                       <ImageGrid data={home} />
                     </Box>
                   ) : null
@@ -475,9 +475,9 @@ function Home() {
           ) : (
             <Box px={20}>
               {homes && homes.length > 0 ? (
-                homes.map((home) =>
+                homes.map((home,i) =>
                   home.row === "contact lenses and more" ? (
-                    <Flex gap={10} px={20} key={home.id} mb={4}>
+                    <Flex gap={10} px={20} key={i} mb={4}>
                       <Box>
                         <Image src={home.image1} alt="image" w="100%" h="100%" objectFit="cover" />
 

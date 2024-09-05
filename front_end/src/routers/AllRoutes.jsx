@@ -31,10 +31,14 @@ import { ScreenRimless } from '../pages/screenglassesFilters/ScreenRimless'
 import { ScreenWomens } from "../pages/screenglassesFilters/ScreenWomens"
 import { Screenhalfrim } from "../pages/screenglassesFilters/Screenhalfrim"
 import { Cart_favCoponant } from "../utils/Cart_favCoponant"
-import { PageComponant } from "../utils/PageComponant"
-import { ProductDetails } from "../utils/ProductDetails"
+import { ProductDetailsE } from "../utils/ProductDetailsE"
 import UploadImg from "../headers/UploadImg"
-
+import { PageComponantEyeglasses } from "../utils/PageComponantEyeglasses"
+import { PageComponantKidGlasses } from "../utils/PageComponantKidGlasses"
+import { PageComponantScreenGlasses } from "../utils/PageComponantScreenGlasses"
+import { BuyProdE } from "../utils/compoEyehelper/BuyProdE"
+import { ProductDetailsK } from "../utils/compoKidshelper/ProductDetailsK"
+import { BuyProdK } from "../utils/compoKidshelper/BuyProdK"
 
 function AllRoutes() {
   return (
@@ -71,10 +75,14 @@ function AllRoutes() {
       <Route path="/screen_glasses/screen_mens" element={<ScreenMens />} />
       <Route path="/screen_glasses/screen_womens" element={<ScreenWomens />} />
       <Route path="/cart_fav" element={<Cart_favCoponant />} />
-      <Route path="/pageCompo" element={<PageComponant />} />
-      <Route path="/product" element={<ProductDetails />} />
+      <Route path="/producte_E/:id" element={<ProductDetailsE />} />
       <Route path="/uploadImg" element={<UploadImg />} />
-
+      <Route path="/page_eyeglasses" element={<PageComponantEyeglasses />} />
+      <Route path="/page_screenglasses" element={<PageComponantScreenGlasses />} />
+      <Route path="/page_kidsGlasses" element={<PageComponantKidGlasses />} />
+      <Route path="/buy_product/:id" element={<BuyProdE />} />
+      <Route path="/productK/:id" element={<ProductDetailsK />} />
+      <Route path="/buy_productK/:id" element={<BuyProdK />} />
     </Routes>
   )
 }

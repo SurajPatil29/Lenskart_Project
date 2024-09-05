@@ -3,6 +3,7 @@
 const express = require("express");
 const applySortingAndPagination = require("../middlewares/sortingAndPagination.middleware");
 const createProductRouteHandler = require("../util/create_Product");
+const ProductModel = require("../models/product.model");
 
 const kidsglassesRoute = express.Router();
 

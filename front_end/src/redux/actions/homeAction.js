@@ -29,6 +29,7 @@ export const fetchHomes = () => async (dispatch) => {
         const response = await axios.get("https://lenskart-project.onrender.com/home/")
         dispatch(fetchHomeSuccess(response.data))
     } catch (error) {
+        console.log(error.response)
         dispatch(fetchHomeFailure("Error Fetchnf Home Data"))
     }
 }

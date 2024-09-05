@@ -6,7 +6,7 @@ function EyeHalfrim() {
   const dispatch = useDispatch()
 
   const handleFilter = () => {
-    dispatch(fetchProducts)
+    dispatch(fetchProducts("halfrim"))
   }
   return (
     <button onClick={handleFilter}>EyeHalfrim</button>

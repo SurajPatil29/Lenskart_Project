@@ -9,6 +9,7 @@ import { EyeMens } from './eyeglassesFilters/EyeMens'
 import { EyeRimless } from './eyeglassesFilters/EyeRimless'
 import { EyeWomens } from './eyeglassesFilters/EyeWomens'
 import { Eyekids } from './eyeglassesFilters/Eyekids'
+import { PageComponantEyeglasses } from '../utils/PageComponantEyeglasses'
 
 
 function Eyeglasses() {
@@ -33,7 +34,7 @@ function Eyeglasses() {
   }
 
 
-console.log(products.products, loading, error, page, sort)
+console.log(products, loading, error, page, sort)
   return (
     <div>
       <h1>Eyeglasses</h1>
@@ -41,24 +42,10 @@ console.log(products.products, loading, error, page, sort)
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div>
-          hii
-        </div>
+        <PageComponantEyeglasses />
       )}
-      {/* Pagination Controls */}
-      <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Previous</button>
-      <button onClick={() => handlePageChange(page + 1)}>Next</button>
-
-      {/* Sorting Controls */}
-      <button onClick={() => handleSortChange("price", "asc")}>Sort by Price (Asc)</button>
-      <button onClick={() => handleSortChange("price", "desc")}>Sort by Price (Desc)</button>
-      {/* Add more sorting controls as needed */}
-      <EyeFullrim />
-      <EyeHalfrim />
-      <EyeMens />
-      <EyeRimless />
-      <EyeWomens />
-      <Eyekids />
+      
+      
     </div>
   )
 }

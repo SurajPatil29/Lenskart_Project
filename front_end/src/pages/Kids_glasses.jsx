@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchKidGlasses, setKidGlassesPage, setKidGlassesSort } from '../redux/actions/kidGlassesAction';
 import { ErrorHandler } from '../loading&error/Errorhandling';
 import { Loadinghandling as LoadingSpinner } from '../loading&error/Loadinghandling';
+import { PageComponantKidGlasses } from '../utils/PageComponantKidGlasses';
 
 
 function Kids_glasses() {
@@ -32,27 +33,10 @@ function Kids_glasses() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div>
-          {/* Display products */}
-          {products && products.length > 0 ? (
-            products.map((product) => (
-              <div key={product._id}>{product.name}</div>
-            ))
-          ) : (
-            <div>No products found.</div>
-          )}
-        </div>
+       <PageComponantKidGlasses />
       )}
 
-      {/* Pagination Controls */}
-      <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Previous</button>
-      <button onClick={() => handlePageChange(page + 1)}>Next</button>
-
-      {/* Sorting Controls */}
-      <button onClick={() => handleSortChange("price", "asc")}>Sort by Price (Asc)</button>
-      <button onClick={() => handleSortChange("price", "desc")}>Sort by Price (Desc)</button>
-      <button onClick={() => handleSortChange("rating", "asc")}>Sort by Rating (Asc)</button>
-      <button onClick={() => handleSortChange("rating", "desc")}>Sort by Rating (Desc)</button>
+   
     </div>
   );
 }
