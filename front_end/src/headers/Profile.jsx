@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import UploadImagePopup from './UploadImagePopup'; // Uncommented the import statement
+import UploadImg from './UploadImg'; // Uncommented the import statement
 
 const ProfileImage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,7 +36,7 @@ const ProfileImage = () => {
         const token = localStorage.getItem("accessToken");
         const config = {
           headers: {
-            Authorization: `Bearer ${token}`,  // Corrected to Authorization header
+            authentication: `Bearer ${token}`,  // Corrected to Authorization header
           },
           params: { userId }, // Correct usage of params for query parameters
         };
@@ -56,35 +56,35 @@ const ProfileImage = () => {
   }, []);
 
   if (loading) {
-    return <Spinner size="xl" />;
+    return <Spinner size="sm" />;
   }
 
-  if (error) {
-    return (
-      <Center>
-        <Alert status="error">
-          <AlertIcon />
-          <AlertTitle>Error:</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-          <Button onClick={() => navigate('/')}>Go to Home</Button>
-        </Alert>
-      </Center>
-    );
-  }
+//   if (error) {
+//     return (
+//       <Center>
+//         <Alert status="error">
+//           <AlertIcon />
+//           <AlertTitle>Error:</AlertTitle>
+//           <AlertDescription>{error}</AlertDescription>
+//           <Button onClick={() => navigate('/')}>Go to Home</Button>
+//         </Alert>
+//       </Center>
+//     );
+//   }
 
   return (
     <Box>
       <Avatar
-        size="xl"
+        size="sm"
         name="User"
         src={profileImg || 'https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg'}
         cursor="pointer"
         onClick={!profileImg ? onOpen : null} // Open popup only if no image
       />
       {!profileImg && (
-        <Button onClick={() => navigate('/upload')}>Upload Image</Button> // Redirect to upload page
+        <Button size="sm" onClick={() => navigate('/uploadImg')}>Upload Image</Button> // Redirect to upload page
       )}
-      <UploadImagePopup isOpen={isOpen} onClose={onClose} setProfileImg={setProfileImg} />
+      {/* <UploadImg isOpen={isOpen} onClose={onClose} setProfileImg={setProfileImg} /> */}
     </Box>
   );
 };

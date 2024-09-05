@@ -33,6 +33,7 @@ import { Screenhalfrim } from "../pages/screenglassesFilters/Screenhalfrim"
 import { Cart_favCoponant } from "../utils/Cart_favCoponant"
 import { PageComponant } from "../utils/PageComponant"
 import { ProductDetails } from "../utils/ProductDetails"
+import UploadImg from "../headers/UploadImg"
 
 
 function AllRoutes() {
@@ -72,7 +73,7 @@ function AllRoutes() {
       <Route path="/cart_fav" element={<Cart_favCoponant />} />
       <Route path="/pageCompo" element={<PageComponant />} />
       <Route path="/product" element={<ProductDetails />} />
-
+      <Route path="/uploadImg" element={<UploadImg />} />
 
     </Routes>
   )

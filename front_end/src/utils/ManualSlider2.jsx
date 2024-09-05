@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
 
-function ManualSlider({ children }) {
+function ManualSlider2({ children }) {
   const scrollRef = useRef(null);
   const itemWidth = 300; // Width of each item
-  const itemsToShow = 4; // Number of items to show at a time
+  const itemsToShow = 3; // Number of items to show at a time
 
   const scroll = (scrollOffset) => {
     if (scrollRef.current) {
-      scrollRef.current.scrollLeft += scrollOffset * itemWidth;
+      scrollRef.current.scrollLeft += scrollOffset * itemWidth * itemsToShow;
     }
   };
 
@@ -17,7 +17,7 @@ function ManualSlider({ children }) {
       <Flex alignItems="center">
         <IconButton
           icon={<Text fontSize="2xl">&lt;</Text>}
-          onClick={() => scroll(-itemsToShow)}
+          onClick={() => scroll(-1)}
           aria-label="Scroll left"
           mr={2}
         />
@@ -38,7 +38,7 @@ function ManualSlider({ children }) {
         </Box>
         <IconButton
           icon={<Text fontSize="2xl">&gt;</Text>}
-          onClick={() => scroll(itemsToShow)}
+          onClick={() => scroll(1)}
           aria-label="Scroll right"
           ml={2}
         />
@@ -47,4 +47,4 @@ function ManualSlider({ children }) {
   );
 }
 
-export { ManualSlider };
+export { ManualSlider2 };

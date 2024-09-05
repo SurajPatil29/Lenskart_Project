@@ -143,7 +143,7 @@ signUpRouter.post("/logout", async (req, res, next)=>{
         return res.status(400).send("Token is required");
     }
     try {
-        const expToken = TokenModel({
+        const expToken = new TokenModel({
             token
         })
         await expToken.save()

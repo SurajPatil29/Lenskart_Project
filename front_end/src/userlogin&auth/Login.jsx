@@ -51,7 +51,7 @@ function Login() {
       console.log('Tokens saved to local storage');
       setLoading(false);  // Stop loading
       // Redirect to the dashboard or another page after successful login
-      navigate('/dashboard'); // Example route, change it to the actual route
+      navigate('/'); // Example route, change it to the actual route
     } catch (err) {
       console.log(err.response);
       setLoading(false);  // Stop loading

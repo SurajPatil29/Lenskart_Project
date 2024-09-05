@@ -1,28 +1,29 @@
-import React, { useRef, useEffect } from 'react';
-import { Box, Flex, IconButton, Text, Stack, Image } from '@chakra-ui/react';
+import React, { useRef, useEffect, useState } from 'react';
+import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
 
-function AutoSlider({width, children}) {
+function AutoSlider({ width, children }) {
   const scrollRef = useRef(null);
-  const imageWidth = width; // Width of one image
-  const scrollAmount = imageWidth;
+  const [scrollAmount, setScrollAmount] = useState(0);
 
-  const calculateImageWidth = () => {
-    const screenWidth = window.innerWidth;
-    const desiredWidth = screenWidth * 0.9; 
-    return desiredWidth;
-  }
+  useEffect(() => {
+    // Set scroll amount based on the component's width
+    const calculateScrollAmount = () => {
+      if (scrollRef.current) {
+        const visibleWidth = scrollRef.current.clientWidth;
+        setScrollAmount(visibleWidth);
+      }
+    };
+
+    calculateScrollAmount(); // Calculate initially
+
+    // Recalculate scroll amount on window resize
+    window.addEventListener('resize', calculateScrollAmount);
+    return () => window.removeEventListener('resize', calculateScrollAmount);
+  }, []);
 
   const scroll = (scrollOffset) => {
     if (scrollRef.current) {
-      const maxScrollLeft = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
-      if (scrollRef.current.scrollLeft + scrollOffset >= maxScrollLeft) {
-        scrollRef.current.scrollLeft = maxScrollLeft;
-        setTimeout(() => {
-          scrollRef.current.scrollLeft = 0;
-        }, 3000); // Small delay to ensure the last image is visible
-      } else {
-        scrollRef.current.scrollLeft += scrollOffset;
-      }
+      scrollRef.current.scrollBy({ left: scrollOffset, behavior: 'smooth' });
     }
   };
 
@@ -32,10 +33,10 @@ function AutoSlider({width, children}) {
     }, 3000);
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, []);
+  }, [scrollAmount]);
 
   return (
-    <Box w={`${imageWidth}px`} overflow="hidden" mx="auto">
+    <Box w="100%" overflow="hidden" mx="auto">
       <Flex alignItems="center">
         <IconButton
           icon={<Text fontSize="2xl">&lt;</Text>}
@@ -45,8 +46,8 @@ function AutoSlider({width, children}) {
         />
         <Box
           ref={scrollRef}
-          w={`${imageWidth}px`}
-          overflowX="hidden"
+          w="100%"
+          overflowX="auto"
           css={{
             '&::-webkit-scrollbar': {
               display: 'none',

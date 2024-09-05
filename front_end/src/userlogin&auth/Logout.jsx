@@ -16,15 +16,16 @@ function Logout() {
     }
 
     try {
-      // Send the logout request to the server
-      await axios.post(
-        'https://lenskart-project.onrender.com/user/logout',
-        {},
-        {
-          headers: {
-            'Authentication': `Bearer ${accessToken}`,
-          },
+      const token = localStorage.getItem("accessToken");
+      const config = {
+        headers: {
+          authentication: `Bearer ${token}`,  // Corrected to Authorization header
         }
+      };
+      
+      const responce = await axios.post(
+        'https://lenskart-project.onrender.com/user/logout',
+        config
       );
 
       // Clear tokens from local storage
@@ -37,7 +38,9 @@ function Logout() {
 
       // Redirect to the login page
       navigate('/');
+      console.log(responce)
     } catch (error) {
+      console.log(error.responce)
       console.error('Logout failed:', error);
       alert('An error occurred during logout. Please try again.');
     }
