@@ -44,10 +44,6 @@ favouriteRouter.get("/all", async (req, res, next) => {
             return res.status(404).json({ msg: "Favorites not found" });
         }
 
-        if (favourite.products.length === 0) {
-            return res.status(200).json({ msg: "Favorites list is empty", products: [] });
-        }
-
         res.status(200).json(favourite);
     } catch (error) {
         next(error);
