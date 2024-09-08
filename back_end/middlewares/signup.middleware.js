@@ -28,3 +28,6 @@ const validateSignupData = (req, res, next) => {
 };
 
 module.exports = validateSignupData;
+
+
+// joi is use to validate the user sign up data if it is valid then pass next other wese respoce error

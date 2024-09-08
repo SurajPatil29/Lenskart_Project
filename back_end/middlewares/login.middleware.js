@@ -20,3 +20,6 @@ const validateLoginData = (req, res, next) => {
 }
 
 module.exports =validateLoginData
+
+// in dis middleware i cas varify the password and email is valid or not
+// if valid then procide next and not valid show errorin responce

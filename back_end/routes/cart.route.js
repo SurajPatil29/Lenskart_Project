@@ -4,7 +4,7 @@ const CartModel = require("../models/cart.model")
 
 const cartRouter = express.Router()
 
-
+// this route i use to add product in perticuller user document
 cartRouter.post("/add", async (req, res, next) =>{
     const {userId, productId} = req.body
     try {
@@ -35,23 +35,8 @@ cartRouter.post("/add", async (req, res, next) =>{
     }
 })
 
-cartRouter.get("/all", async (req, res, next) => {
-    
-    try {
-        const cart = await CartModel.find({}).populate('products')
 
-        if(!cart){
-            return res.status(404).json({msg : "Cart not found"})
-        }
-
-        
-
-        res.status(200).json(cart.products)
-    } catch (error) {
-        next(error)
-    }
-})
-
+// using the user id i find the user document and return products to front end
 cartRouter.get("/:userId", async (req, res, next) => {
     const {userId} = req.params
     try {
@@ -71,7 +56,7 @@ cartRouter.get("/:userId", async (req, res, next) => {
     }
 })
 
-
+// delet the perticuler product from the cart using product id
 cartRouter.delete("/:userId/product/:productId", async (req, res, next)=>{
     const {userId, productId} = req.params
     try {

@@ -21,3 +21,7 @@ const favouriteSchema = new mongoose.Schema({
 const FavouriteModel = mongoose.model("Favourite", favouriteSchema); // Changed "cart" to "Favourite" for clarity
 
 module.exports = FavouriteModel;
+
+
+// in this module i was write the logic for the favorite product save in document for the prticuler user
+// i was save here user id and favorite product in perticuler document and get id fro the user collection and product collection

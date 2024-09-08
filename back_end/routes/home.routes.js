@@ -2,6 +2,8 @@
 const express = require('express');
 const homeRouter = express.Router();
 const Home = require('../models/home.model'); 
+
+
 // Route to get all home data
 homeRouter.get('/', async (req, res) => {
   try {

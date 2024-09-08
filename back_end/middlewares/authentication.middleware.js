@@ -6,43 +6,52 @@ const UserModel = require("../models/signUp.model");
 const key1 = process.env.JWT_SECRET_KEY1;
 
 const auth = async (req, res, next) => {
-    // Retrieve token from the 'Authorization' header
-    const token = req.headers.authentication ? req.headers.authentication.split(" ")[1] : null;
+    // Retrieve token from the 'Authorization' header in 'Bearer' format
+    const token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : null;
     
     // Check if token is provided
     if (!token) {
-        return res.status(401).send("No token provided. Please log in.");
+        return res.status(401).json({ msg: "No token provided. Please log in." });
     }
 
     try {
-        // Check if the token is in the expired token list
+        // Check if the token is in the expired/blacklisted token list
         const expToken = await TokenModel.findOne({ token });
         if (expToken) {
-            return res.status(401).send("You are not logged in. Please log in first.");
+            return res.status(401).json({ msg: "Session expired. Please log in again." });
         }
 
-        // Verify JWT token
+        // Verify the JWT token
         const decoded = jwt.verify(token, key1);
 
-        // Find user by ID from decoded token
+        // Find the user by ID from the decoded token
         const user = await UserModel.findOne({ _id: decoded.id });
         if (!user) {
-            return res.status(404).send("User not found. Please log in again.");
+            return res.status(404).json({ msg: "User not found. Please log in again." });
         }
 
-        // Attach user to request object
+        // Attach user data to the request object for future use in subsequent middleware or routes
         req.user = user;
-        next(); // Proceed to the next middleware
+        next(); // Proceed to the next middleware or route handler
 
     } catch (error) {
-        // Handle JWT errors (like expired token or invalid signature)
-        if (error.name === "JsonWebTokenError" || error.name === "TokenExpiredError") {
-            return res.status(401).send("Invalid or expired token. Please log in again.");
+        // Handle specific JWT errors
+        if (error.name === "JsonWebTokenError") {
+            return res.status(401).json({ msg: "Invalid token. Please log in again." });
+        }
+        if (error.name === "TokenExpiredError") {
+            return res.status(401).json({ msg: "Token expired. Please log in again." });
         }
 
-        // Other errors
+        // Handle other errors
         next(error);
     }
 };
 
 module.exports = auth;
+
+
+
+// in this middleware i was define the logic of the auth the user using the
+// jwt and after if user is auth then i get user data from server and pass this 
+// data in query for the future use perpose

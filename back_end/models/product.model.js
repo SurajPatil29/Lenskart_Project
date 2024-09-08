@@ -26,3 +26,4 @@ const productSchema = new mongoose.Schema({
 const ProductModel = mongoose.model("Products", productSchema);
 
 module.exports = ProductModel;
+// in this module save all product details

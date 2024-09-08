@@ -33,3 +33,8 @@ const applySortingAndPagination = (req, res, next) => {
 };
 
 module.exports = applySortingAndPagination;
+
+
+// this middleware help use to reduce the repetative code in across the routes
+// this read the query and and give the direct object and we pass the object , 
+// and sort or paginate the the page

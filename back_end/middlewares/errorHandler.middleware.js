@@ -12,3 +12,7 @@ function errorHandler(err, req, res, next){
 }
 
 module.exports = errorHandler
+
+// this error handling router use for handling error across the all routes,
+// and middleware this middleware we use in index.js in bottom of the code,
+// this logic contain how to error responce send and and console the error

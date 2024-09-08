@@ -33,3 +33,6 @@ const userSchema = mongoose.Schema({
 const UserModel = mongoose.model("User", userSchema);
 
 module.exports = UserModel;
+
+
+// this module save the user data in db using this module 
